@@ -1,44 +1,49 @@
-import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
-import * as errorHandler from 'errorhandler';
-import * as express from 'express';
-import * as expressValidator from 'express-validator';
-import * as logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import path from 'path';
+import helmet from 'helmet';
 
-import { initRoutes } from './controllers/routes';
+import express, { NextFunction, Request, Response } from 'express';
+import StatusCodes from 'http-status-codes';
+import 'express-async-errors';
 
-/**
- * Create Express server.
- */
+import BaseRouter from './routes';
+import logger from '@shared/Logger';
+
 const app = express();
+const { BAD_REQUEST } = StatusCodes;
 
-/**
- * Express configuration.
- */
-const DEFAULT_PORT = 3000;
-app.set('port', process.env.PORT || DEFAULT_PORT);
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
-app.use(cors());
 
-/**
- * Error Handler. Provides full stack - remove for production
- */
-app.use(errorHandler());
 
-/**
- * Initialize routing.
- */
-initRoutes(app);
+/************************************************************************************
+ *                              Set basic express settings
+ ***********************************************************************************/
 
-/**
- * Start Express server.
- */
-app.listen(app.get('port'), () => {
-  console.log(('  App is running at http://localhost:%d in %s mode'), app.get('port'), app.get('env'));
-  console.log('  Press CTRL-C to stop\n');
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+
+// Show routes called in console during development
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'sandbox') {
+    app.use(morgan('dev'));
+}
+
+// Security
+if (process.env.NODE_ENV === 'production') {
+    app.use(helmet());
+}
+
+// Add APIs
+app.use('/api', BaseRouter);
+
+// Print API errors
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    logger.err(err, true);
+    return res.status(BAD_REQUEST).json({
+        error: err.message,
+    });
 });
 
-module.exports = app;
+// Export express instance
+export default app;
