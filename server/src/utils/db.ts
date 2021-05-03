@@ -1,4 +1,5 @@
 import AuthorizationToken from '../entities/AuthorizationToken';
+import Settings from '../entities/Settings';
 import { CodeChallenge } from './generatePKCE'
 
 export interface DB {
@@ -9,7 +10,8 @@ export interface DB {
     codeChallenges: {
         [key: string]: CodeChallenge
     },
-    codeChallenge: CodeChallenge
+    codeChallenge: CodeChallenge,
+    settings: Settings
 }
 
 const db: DB = {
@@ -19,7 +21,8 @@ const db: DB = {
     codeChallenge: {
         codeChallenge: '',
         verifier: ''
-    }
+    },
+    settings: new Settings(undefined)
 }
 
 export default db;

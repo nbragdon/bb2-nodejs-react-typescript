@@ -10,9 +10,8 @@ export default function Navbar({ }) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6">
-                    News
+                    BB2 Sample App
                 </Typography>
-                <Button color="inherit">Login</Button>
             </Toolbar>
         </AppBar>
     );

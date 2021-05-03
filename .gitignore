@@ -25,3 +25,5 @@ yarn-error.log*
 development.env
 production.env
 sandbox.env
+
+config.ts
