@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
+import Settings from './settings';
 import { Authorization } from '../types/authorization';
+import { SettingsType } from '../types/settings';
 
 
 export default function Authorize({ }) {
     const [authToken, setAuthToken] = useState<Authorization | undefined>(undefined);
-    const [authUrl, setAuthUrl] = useState<string | undefined>(undefined);
+    const [settingsState, setSettingsState] = React.useState<SettingsType>({
+        pkce: true,
+        version: 'v1',
+        env: 'sandbox'
+    });
 
     async function loadInitialData() {
-        const authUrlResponse = await axios.get(`/api/authorize/authurl`);
         const authTokenResponse = await axios.get('/api/authorize/currentAuthToken');
     
-        setAuthUrl(authUrlResponse.data);
         setAuthToken(authTokenResponse.data);
     }
 
@@ -22,8 +27,10 @@ export default function Authorize({ }) {
         loadInitialData();
     }, []);
 
-    function goAuthorize() {
-        window.location.href = authUrl || '/';
+    async function goAuthorize() {
+        const authUrlResponse = await axios.get(`/api/authorize/authurl`, { params: settingsState });
+        console.log('authUrlResponse.data', authUrlResponse.data);
+        window.location.href = authUrlResponse.data || '/';
     }
 
     const patientId = authToken?.patient || 'None';
@@ -33,12 +40,13 @@ export default function Authorize({ }) {
     </pre></div>);
     
     return (
-        <div>
+        <Box>
             <Typography variant="h2">Authorized Patient: {patientId}</Typography>
+            <Settings settingsState={settingsState} setSettingsState={setSettingsState}/>
             <Typography>If you don't have an authorized patient, click the button below to authorize one</Typography><br />
             <Button onClick={goAuthorize} color="primary" variant="contained">Authorize</Button><br />
             <Typography variant="h3">Auth Token Details:</Typography>
             {authTokenDisplay}
-        </div>
+        </Box>
     );
 }

@@ -1,6 +1,7 @@
 import StatusCodes from 'http-status-codes';
 import { Router, Request, Response } from 'express';
 import AuthorizationToken from '../entities/AuthorizationToken';
+import Settings from '../entities/Settings';
 import db from '../utils/db';
 import { getAccessToken, generateAuthorizeUrl } from '../utils/bb2';
 
@@ -28,6 +29,11 @@ export async function authorizationCallback(req: Request, res: Response) {
 }
 
 export async function getAuthUrl(req: Request, res: Response) {
+    db.settings = new Settings({
+        version: req.params?.version || db.settings.version,
+        env: req.params?.env || db.settings.env,
+        pkce: req.params.pkce ? req.params.pkce === 'true' : db.settings.pkce
+    });
     res.send(generateAuthorizeUrl(db.codeChallenge));
 }
 
