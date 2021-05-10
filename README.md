@@ -4,7 +4,7 @@ Running backend
     yarn install
     yarn start:dev
 
-    copy server/src/config/sample.config.ts -> server/src/config/config.ts
+    copy server/src/configs/sample.config.ts -> server/src/configs/config.ts
     replace the secret variables with the ones for your application
 
 Running frontend
