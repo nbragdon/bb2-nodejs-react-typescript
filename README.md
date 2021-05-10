@@ -6,7 +6,7 @@ Running backend
     copy server/src/configs/sample.config.ts -> server/src/configs/config.ts
     replace the secret variables with the ones for your application
 
-    copy server/src/pre-start/sandbox.sample.env -> server/src/pre-start/development.sample.env
+    copy server/src/pre-start/env/sandbox.sample.env -> server/src/pre-start/env/development.sample.env
 
     yarn start:dev
 
