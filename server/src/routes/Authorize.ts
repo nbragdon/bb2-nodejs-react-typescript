@@ -9,7 +9,7 @@ const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 export async function authorizationCallback(req: Request, res: Response) {
     try {
-        console.log('req.params', req.params);
+        console.log('req.params', req.query);
         if (!req.query.code) {
             throw new Error('Response was missing access code');
         }

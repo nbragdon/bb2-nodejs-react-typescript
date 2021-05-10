@@ -5,15 +5,15 @@ export type CodeChallenge = {
     verifier: string
 }
 
-function base64URLEncode(str: Buffer): string {
-    return str.toString('base64')
+function base64URLEncode(buffer: Buffer): string {
+    return buffer.toString('base64')
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
         .replace(/=/g, '');
 }
 
-function sha256(buffer: string): Buffer {
-    return crypto.createHash('sha256').update(buffer).digest();
+function sha256(str: string): Buffer {
+    return crypto.createHash('sha256').update(str).digest();
 }
 
 export function generateCodeChallenge(): CodeChallenge {
