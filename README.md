@@ -1,10 +1,17 @@
 Running backend
 ---------------
-    cd server; yarn start:dev
+    cd server
+    yarn install
+    yarn start:dev
+
+    copy server/src/config/sample.config.ts -> server/src/config/config.ts
+    replace the secret variables with the ones for your application
 
 Running frontend
 ----------------
-    cd client; yarn start
+    cd client
+    yarn install
+    yarn start
 
 Development
 -----------
