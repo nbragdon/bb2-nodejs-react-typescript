@@ -12,6 +12,10 @@ export default function Navbar({ }) {
                 <Typography variant="h6">
                     BB2 Sample App
                 </Typography>
+                <Button color="inherit">Benefits</Button>
+                <Button color="inherit">Patients</Button>
+                <Button color="inherit">Coverage</Button>
+                <Button color="inherit">User Profile</Button>
             </Toolbar>
         </AppBar>
     );

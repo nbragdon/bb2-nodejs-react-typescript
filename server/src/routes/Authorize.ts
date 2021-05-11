@@ -9,11 +9,15 @@ const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 export async function authorizationCallback(req: Request, res: Response) {
     try {
-        console.log('req.params', req.query);
+        console.log('req.query', req.query);
         if (!req.query.code) {
             throw new Error('Response was missing access code');
         }
-        const response = await getAccessToken(req.query.code?.toString(), db.codeChallenge);
+        if (db.settings.pkce && !req.query.state) {
+            throw new Error('State is required when using PKCE');
+        }
+
+        const response = await getAccessToken(req.query.code?.toString(), req.query.state?.toString());
     
         console.log(response);
         console.log(response.data);
@@ -34,7 +38,7 @@ export async function getAuthUrl(req: Request, res: Response) {
         env: req.params?.env || db.settings.env,
         pkce: req.params.pkce ? req.params.pkce === 'true' : db.settings.pkce
     });
-    res.send(generateAuthorizeUrl(db.codeChallenge));
+    res.send(generateAuthorizeUrl());
 }
 
 export async function getCurrentAuthToken(req: Request, res: Response) {

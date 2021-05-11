@@ -23,3 +23,7 @@ export function generateCodeChallenge(): CodeChallenge {
         verifier: verifier
     };
 }
+
+export function generateRandomState(): string {
+    return base64URLEncode(crypto.randomBytes(32));
+}
