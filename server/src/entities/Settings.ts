@@ -13,6 +13,6 @@ export default class Settings implements ISettings {
     constructor(settings: ISettings | undefined) {
         this.env = settings?.env || 'sandbox';
         this.version = settings?.version || 'v1';
-        this.pkce = settings?.pkce || true;
+        this.pkce = settings?.pkce != undefined ? settings.pkce : true;
     }
 }

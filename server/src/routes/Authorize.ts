@@ -33,11 +33,14 @@ export async function authorizationCallback(req: Request, res: Response) {
 }
 
 export async function getAuthUrl(req: Request, res: Response) {
+    console.log('req.query', req.query);
+    const pkce = req.params.pkce === 'true';
     db.settings = new Settings({
-        version: req.params?.version || db.settings.version,
-        env: req.params?.env || db.settings.env,
-        pkce: req.params.pkce ? req.params.pkce === 'true' : db.settings.pkce
+        version: req.query?.version?.toString() || db.settings.version,
+        env: req.query?.env?.toString() || db.settings.env,
+        pkce: req.query?.pkce?.toString() ? pkce : db.settings.pkce
     });
+    console.log('db.settings', db.settings);
     res.send(generateAuthorizeUrl());
 }
 
