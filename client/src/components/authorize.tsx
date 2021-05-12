@@ -19,8 +19,10 @@ export default function Authorize({ }) {
 
     async function loadInitialData() {
         const authTokenResponse = await axios.get('/api/authorize/currentAuthToken');
+        const getSettingsResponse = await axios.get('/api/settings');
     
         setAuthToken(authTokenResponse.data);
+        setSettingsState(getSettingsResponse.data);
     }
 
     useEffect(() => {
