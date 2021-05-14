@@ -11,7 +11,7 @@ import { SettingsType } from '../types/settings';
 
 export default function Authorize({ }) {
     const [authToken, setAuthToken] = useState<Authorization | undefined>(undefined);
-    const [settingsState, setSettingsState] = React.useState<SettingsType>({
+    const [settingsState, setSettingsState] = useState<SettingsType>({
         pkce: true,
         version: 'v1',
         env: 'sandbox'

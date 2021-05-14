@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, AppBar, IconButton, Button, Toolbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link as RouterLink } from 'react-router-dom';
 
 export default function Navbar({ }) {
     return (
@@ -10,12 +11,14 @@ export default function Navbar({ }) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6">
-                    BB2 Sample App
+                    <RouterLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        BB2 Sample App
+                    </RouterLink>
                 </Typography>
-                <Button color="inherit">Benefits</Button>
-                <Button color="inherit">Patients</Button>
-                <Button color="inherit">Coverage</Button>
-                <Button color="inherit">User Profile</Button>
+                <Button component={RouterLink} to="/benefit" color="inherit">Benefit</Button>
+                <Button component={RouterLink} to="/patient" color="inherit">Patient</Button>
+                <Button component={RouterLink} to="/coverage" color="inherit">Coverage</Button>
+                <Button component={RouterLink} to="/userprofile" color="inherit">User Profile</Button>
             </Toolbar>
         </AppBar>
     );
