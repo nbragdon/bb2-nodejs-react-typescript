@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { Button, Dialog } from '@cmsgov/design-system';
+// import Typography from '@material-ui/core/Typography';
+// import Box from '@material-ui/core/Box';
 
 import Settings from './settings';
 import { Authorization } from '../types/authorization';
@@ -16,6 +16,7 @@ export default function Authorize({ }) {
         version: 'v1',
         env: 'sandbox'
     });
+    const [showExampleModal, setShowExampleModal] = useState(false);
 
     async function loadInitialData() {
         const authTokenResponse = await axios.get('/api/authorize/currentAuthToken');
@@ -42,13 +43,45 @@ export default function Authorize({ }) {
     </pre></div>);
     
     return (
-        <Box>
-            <Typography variant="h2">Authorized Patient: {patientId}</Typography>
-            <Settings settingsState={settingsState} setSettingsState={setSettingsState}/>
-            <Typography>If you don't have an authorized patient, click the button below to authorize one</Typography><br />
-            <Button onClick={goAuthorize} color="primary" variant="contained">Authorize</Button><br />
-            <Typography variant="h3">Auth Token Details:</Typography>
+        <div>
+            <h2>Authorized Patient: {patientId}</h2>
+            <p>If you don't have an authorized patient, click the button below to authorize one</p>
+           <Button 
+                onClick={() => setShowExampleModal(true)} 
+                variation="transparent"
+            >
+                Auth settings
+            </Button>            
+            {showExampleModal && (
+                <Dialog
+                onExit={() => setShowExampleModal(false)}
+                getApplicationNode={() => document.getElementById('App')}
+                heading="Auth settings"
+                actions={[
+                    <Button 
+                        className="ds-c-button ds-c-button--primary ds-u-margin-right--1" 
+                        key="primary"
+                        type="submit"
+                    onClick={() => setShowExampleModal(false)}
+
+                    >
+                    Save settings
+                    </Button>,
+                    <Button
+                    className="ds-c-button ds-c-button--transparent"
+                    key="cancel"
+                    onClick={() => setShowExampleModal(false)}
+                    >
+                    Cancel
+                    </Button>,
+                ]}
+                >
+                    <Settings settingsState={settingsState} setSettingsState={setSettingsState}/>
+                </Dialog>
+            )}
+            <Button onClick={goAuthorize} variation="primary" size="big" >Authorize</Button><br />
+            <h3>Auth Token Details:</h3>
             {authTokenDisplay}
-        </Box>
+        </div>
     );
 }
