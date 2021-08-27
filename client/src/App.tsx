@@ -1,9 +1,9 @@
-import React from 'react';
 import Authorize from './components/authorize';
 import Navbar from './components/navbar';
 import Header from './components/header';
 import Dataviewer from './components/dataviewer';
 import Patient from './components/patient';
+import PatientData from './components/patientData';
 import { 
   BrowserRouter as Router, 
   Switch,
@@ -13,11 +13,20 @@ import { TabPanel, Tabs } from '@cmsgov/design-system';
 
 function App() {
   return (
+    <div className="ds-l-container ds-u-margin-bottom--7 ds-u-padding-bottom--7">
     <Router>
       <Header />
       <Tabs tablistClassName="ds-u-margin-top--3">
         <TabPanel id="patient" tab="Patient info">
-          <Patient />
+          <h2>Patient information</h2>
+          <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-lg-flex-direction--row ds-u-flex-wrap--nowrap ds-u-lg-flex-wrap--wrap">
+            <div className="bb-c-card default-card">
+              <Patient />
+            </div>          
+            <div className="bb-c-card default-card">
+              <PatientData />
+            </div>          
+          </div>
         </TabPanel>
         <TabPanel id="routes" tab="Routes and settings">
 
@@ -59,6 +68,7 @@ function App() {
         </TabPanel>
       </Tabs>
     </Router>
+    </div>
   );
 }
 

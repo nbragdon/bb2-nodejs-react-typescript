@@ -1,7 +1,4 @@
-import React from 'react';
-// import { Typography, AppBar, IconButton, Button, Toolbar } from '@material-ui/core';
-import { Badge, Button } from '@cmsgov/design-system';
-// import MenuIcon from '@material-ui/icons/Menu';
+import { Badge } from '@cmsgov/design-system';
 import { Link as RouterLink } from 'react-router-dom';
 
 export default function Header({ }) {

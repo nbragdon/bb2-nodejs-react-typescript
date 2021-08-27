@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Button, Dialog } from '@cmsgov/design-system';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
-
 import Settings from './settings';
 import { Authorization } from '../types/authorization';
 import { SettingsType } from '../types/settings';
