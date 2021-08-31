@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Button, Dialog } from '@cmsgov/design-system';
+import { Button } from '@cmsgov/design-system';
 import Settings from './settings';
 import { Authorization } from '../types/authorization';
 import { SettingsType } from '../types/settings';
@@ -34,9 +34,9 @@ export default function Authorize({ }) {
 
     const patientId = authToken?.patient || 'None';
 
-    const authTokenDisplay = (<div><pre>
-        {JSON.stringify(authToken, null, 2) }
-    </pre></div>);
+    // const authTokenDisplay = (<div><pre>
+    //     {JSON.stringify(authToken, null, 2) }
+    // </pre></div>);
     
     return (
         <div>

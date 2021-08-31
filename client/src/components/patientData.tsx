@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@cmsgov/design-system';
-// import eob from '../data/eob.json'
+import Records from './records'
 import chart from '../images/who-charted.png'
 
 export default function PatientData({ }) {
-    const [eob, setEob] = useState('Add your Medicare data')
-    //TODO: Fetch and return data 
-    useEffect(() => {
-        fetch("../data/eob.json")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            // setEob(data);
-        })
-    },[])      
+    const [header, setHeader] = useState('Add your Medicare data');
+    const [show, setShow] = useState(true);     
     return (
         <div>
             <h3>Medicare records</h3>
@@ -24,12 +16,10 @@ export default function PatientData({ }) {
                 </p>
             </div>
             <div className='ds-u-margin-top--2 ds-u-border-top--2'>
-                <h4>{ eob }</h4>
-                <Button variation="primary" onClick={() => setEob('Your data was retreived')}>Authorize</Button>
-                {/*
-                Button to fetch data and notify of success after auth flow
-                {eob && <Button variation="primary" onClick={() => setEob(eob)}>Authorize</Button>}
-                */}
+                <div>
+                    <h4>{ header }</h4>
+                </div>
+                <Button variation="primary" onClick={() => setHeader('Your data was retreived')}>Authorize</Button>
             </div>
         </div>
     );

@@ -25,6 +25,11 @@ $image-path: "~@cmsgov/design-system/dist/images";
   color: #000;
 }
 
+.full-width-card {
+  max-width: 100%;
+  padding: 1rem;
+}
+
 @media screen and (min-device-width: 1024px) {
   .bb-c-card.default-card {
     width: 445px;

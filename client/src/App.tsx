@@ -4,6 +4,7 @@ import Header from './components/header';
 import Dataviewer from './components/dataviewer';
 import Patient from './components/patient';
 import PatientData from './components/patientData';
+import Records from './components/records';
 import { 
   BrowserRouter as Router, 
   Switch,
@@ -27,6 +28,8 @@ function App() {
               <PatientData />
             </div>          
           </div>
+          {/* TODO: Display records after data fetch */}
+          <Records /> 
         </TabPanel>
         <TabPanel id="routes" tab="Auth settings">
         <div>
