@@ -1,5 +1,5 @@
 import Authorize from './components/authorize';
-import Navbar from './components/navbar';
+// import Navbar from './components/navbar';
 import Header from './components/header';
 import Dataviewer from './components/dataviewer';
 import Patient from './components/patient';
@@ -28,11 +28,10 @@ function App() {
             </div>          
           </div>
         </TabPanel>
-        <TabPanel id="routes" tab="Routes and settings">
-
+        <TabPanel id="routes" tab="Auth settings">
         <div>
           <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <Switch>
               <Route exact path="/">
                 <Authorize />
@@ -54,11 +53,11 @@ function App() {
         </div>
         </TabPanel>
         <TabPanel id="summary" tab="Summary">
-          <p>
+          <p className='ds-u-measure--base'>
             Blue Button 2.0 is a standards-based application programming interface (API) that delivers Medicare Part A, B, and D data for over 60 million Medicare beneficiaries. <a href="https://bluebutton.cms.gov/">Learn more about Blue Button 2.0</a>
           </p>
 
-          <p>
+          <p className='ds-u-measure--base'>
             The CMS design system is a set of open source design and front-end development resources
             for creating Section 508 compliant, responsive, and consistent websites. It builds on the
             U.S. Web Design System and extends it to support additional CSS and React components,

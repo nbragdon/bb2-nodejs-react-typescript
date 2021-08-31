@@ -13,7 +13,6 @@ export default function Authorize({ }) {
         version: 'v1',
         env: 'sandbox'
     });
-    const [showExampleModal, setShowExampleModal] = useState(false);
 
     async function loadInitialData() {
         const authTokenResponse = await axios.get('/api/authorize/currentAuthToken');
@@ -42,43 +41,15 @@ export default function Authorize({ }) {
     return (
         <div>
             <h2>Authorized Patient: {patientId}</h2>
-            <p>If you don't have an authorized patient, click the button below to authorize one</p>
-           <Button 
-                onClick={() => setShowExampleModal(true)} 
-                variation="transparent"
-            >
-                Auth settings
-            </Button>            
-            {showExampleModal && (
-                <Dialog
-                onExit={() => setShowExampleModal(false)}
-                getApplicationNode={() => document.getElementById('App')}
-                heading="Auth settings"
-                actions={[
-                    <Button 
-                        className="ds-c-button ds-c-button--primary ds-u-margin-right--1" 
-                        key="primary"
-                        type="submit"
-                    onClick={() => setShowExampleModal(false)}
+            <p>If you don't have an authorized patient, click the button below to authorize one.</p>
 
-                    >
-                    Save settings
-                    </Button>,
-                    <Button
-                    className="ds-c-button ds-c-button--transparent"
-                    key="cancel"
-                    onClick={() => setShowExampleModal(false)}
-                    >
-                    Cancel
-                    </Button>,
-                ]}
-                >
-                    <Settings settingsState={settingsState} setSettingsState={setSettingsState}/>
-                </Dialog>
-            )}
-            <Button onClick={goAuthorize} variation="primary" size="big" >Authorize</Button><br />
-            <h3>Auth Token Details:</h3>
-            {authTokenDisplay}
+            <Settings settingsState={settingsState} setSettingsState={setSettingsState}/>
+            <Button onClick={goAuthorize} variation="primary" size="big" className='ds-u-margin-top--2'>Authorize</Button><br />
+            {/* <h3>Auth Token Details:</h3>
+            {authTokenDisplay} */}
+            <p className='ds-u-measure--wide'>
+                <a href="https://bluebutton.cms.gov/developers/">Learn more about v2/v1, PCKE, and other options from the Blue Button 2.0 documentation</a>
+            </p>
         </div>
     );
 }
