@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { 
-    Typography, 
-    Box, 
     TextField,
     Button
-} from '@material-ui/core';
+} from '@cmsgov/design-system';
 
 type Props = {
     dataUrl: string,
@@ -31,13 +29,19 @@ export default function({dataUrl, name}: Props) {
     </pre></div>);
 
     return (
-        <Box>
-            <Typography variant="h2">{name}</Typography>
+        <div>
+            <h2>{name}</h2>
             <form noValidate autoComplete="off">
-                <TextField fullWidth value={urlQueryString} onChange={onTextChange} id="outlined-basic" label="Query Params" variant="outlined"/>
+                <TextField 
+                name="paramenter"
+                value={urlQueryString} 
+                onChange={onTextChange} 
+                id="outlined-basic" 
+                label="Query Params"
+                />
             </form><br />
-            <Button onClick={getData} variant="contained" color="primary">Retrieve</Button><br />
+            <Button onClick={getData} color="primary">Retrieve</Button><br />
             {authTokenDisplay}
-        </Box>
+        </div>
     )
 }
