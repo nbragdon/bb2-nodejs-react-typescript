@@ -2,6 +2,8 @@ import { Table, TableCaption, TableRow, TableCell, TableHead, TableBody } from '
 
 export default function Records({ }) {   
     //TODO: Fetch real data 
+    // server hands back a JSON endpoint to the front-end 
+    // use effect 
     const items = [
         {
             id: 1,

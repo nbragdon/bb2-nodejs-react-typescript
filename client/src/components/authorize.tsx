@@ -10,7 +10,7 @@ export default function Authorize({ }) {
     const [authToken, setAuthToken] = useState<Authorization | undefined>(undefined);
     const [settingsState, setSettingsState] = useState<SettingsType>({
         pkce: true,
-        version: 'v1',
+        version: 'v2',
         env: 'sandbox'
     });
 
