@@ -6,6 +6,7 @@ import db from '../utils/db';
 import { getAccessToken, generateAuthorizeUrl } from '../utils/bb2';
 import axios from 'axios';
 import { getBenefitData } from './Data';
+import { getLoggedInUser } from 'src/utils/user';
 
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
@@ -29,15 +30,16 @@ export async function authorizationCallback(req: Request, res: Response) {
          */
         const authToken = new AuthorizationToken(response.data);
     
-        db.authTokens[authToken.patient] = authToken;
+        const loggedInUser = getLoggedInUser(db);
+        loggedInUser.authToken = authToken;
+        //db.authTokens[authToken.patient] = authToken;
 
         /* DEVELOPER NOTES:
         * Here we will use the token to get the EoB data
         * for the patient
         */
-      
-        const eobResponse = await getBenefitData( req, res);
-        console.log('eobResponse.data', eobResponse);
+        const eobData = await getBenefitData( req, res);
+        loggedInUser.eobData = eobData;
         
 
     } catch (e) {
@@ -72,8 +74,8 @@ export async function getAuthUrl(req: Request, res: Response) {
 }
 
 export async function getCurrentAuthToken(req: Request, res: Response) {
-    const firstAuthTokenKey = Object.keys(db.authTokens)[0];
-    res.send(db.authTokens[firstAuthTokenKey]);
+    const loggedInUser = getLoggedInUser(db);
+    res.send(loggedInUser.authToken);
 }
 
 const router = Router();

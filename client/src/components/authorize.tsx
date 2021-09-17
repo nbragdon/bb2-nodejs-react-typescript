@@ -7,6 +7,7 @@ import { SettingsType } from '../types/settings';
 
 
 export default function Authorize({ }) {
+    const [eob, setEob] = useState<any>();
     const [authToken, setAuthToken] = useState<Authorization | undefined>(undefined);
     const [settingsState, setSettingsState] = useState<SettingsType>({
         pkce: true,
@@ -17,9 +18,10 @@ export default function Authorize({ }) {
     async function loadInitialData() {
         const authTokenResponse = await axios.get('/api/authorize/currentAuthToken');
         const getSettingsResponse = await axios.get('/api/settings');
-    
+        const getEob = await axios.get('/api/data/benefit');
         setAuthToken(authTokenResponse.data);
         setSettingsState(getSettingsResponse.data);
+        setEob(getEob);
     }
 
     useEffect(() => {

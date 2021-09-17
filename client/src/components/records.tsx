@@ -1,9 +1,33 @@
 import { Table, TableCaption, TableRow, TableCell, TableHead, TableBody } from '@cmsgov/design-system';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Records({ }) {   
     //TODO: Fetch real data 
     // server hands back a JSON endpoint to the front-end 
     // use effect 
+    const [eob, setEob] = useState<any>();
+    let eobDisplay = (<div><pre>NO DATA
+    </pre></div>);
+
+    async function loadInitialData() {
+        const getEob = await axios.get('/api/data/benefit');
+        setEob(getEob.data);
+    }
+
+    if (eob == ''){
+        let eobDisplay = (<div><pre>NO DATA
+            </pre></div>);
+    } else {
+        eobDisplay = (<div><pre>
+        {JSON.stringify(eob, null, 2)}
+        </pre></div>);
+    }
+   
+    useEffect(() => {
+        loadInitialData();
+    }, []);
+
     const items = [
         {
             id: 1,
@@ -26,6 +50,7 @@ export default function Records({ }) {
     ]    
     return (
         <div className='full-width-card'>
+            {eobDisplay}
             <Table className="ds-u-margin-top--2" stackable stackableBreakpoint="md">
                 <TableCaption>Medicare claims data</TableCaption>
                 <TableHead>

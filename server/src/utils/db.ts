@@ -2,11 +2,15 @@ import AuthorizationToken from '../entities/AuthorizationToken';
 import Settings from '../entities/Settings';
 import { CodeChallenge } from './generatePKCE'
 
+export interface User {
+    authToken?: AuthorizationToken,
+    name: string,
+    userName: string,
+    eobData?: any
+}
 export interface DB {
     patients: object,
-    authTokens: {
-        [key: string]: AuthorizationToken
-    },
+    users: User[],
     codeChallenges: {
         [key: string]: CodeChallenge
     },
@@ -16,7 +20,10 @@ export interface DB {
 
 const db: DB = {
     patients: {},
-    authTokens: {},
+    users: [{
+        name: 'hard code name',
+        userName: 'hard coded'
+    }],
     codeChallenges: {},
     codeChallenge: {
         codeChallenge: '',
