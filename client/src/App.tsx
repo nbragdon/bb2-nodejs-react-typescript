@@ -1,4 +1,4 @@
-import Authorize from './components/authorize';
+//import Authorize from './components/authorize';
 // import Navbar from './components/navbar';
 import Header from './components/header';
 import Dataviewer from './components/dataviewer';
@@ -30,14 +30,14 @@ function App() {
           </div>
           {/* TODO: Display records after data fetch */}
           <Records /> 
-        </TabPanel>
-        <TabPanel id="routes" tab="Auth settings">
+          {/*</TabPanel>
+        <TabPanel id="routes" tab="Auth settings"> */}
         <div>
           <div>
             {/* <Navbar /> */}
             <Switch>
               <Route exact path="/">
-                <Authorize />
+               {/* <Authorize /> */}
               </Route>
               <Route path="/benefit">
                 <Dataviewer dataUrl="/api/data/benefit" name="Benefit"></Dataviewer>

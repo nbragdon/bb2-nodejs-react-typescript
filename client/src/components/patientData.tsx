@@ -24,7 +24,12 @@ export default function PatientData({ }) {
     }
 
     const patientId = authToken?.patient || 'None';
-
+    
+    /* DEVELOPER NOTES:
+    * Here we are hard coding the users information for the sake of saving time
+    * you would display user information that you have stored in whatever persistence layer/mechcanism 
+    * your application is using
+    */
     return (
         <div>
             <h3>Medicare records</h3>

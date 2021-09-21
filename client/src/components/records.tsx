@@ -3,9 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export default function Records({ }) {   
-    //TODO: Fetch real data 
-    // server hands back a JSON endpoint to the front-end 
-    // use effect 
+
     const [eob, setEob] = useState<any>();
     let eobDisplay = (<div><pre>NO DATA
     </pre></div>);

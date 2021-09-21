@@ -20,27 +20,33 @@ export async function authorizationCallback(req: Request, res: Response) {
             throw new Error('State is required when using PKCE');
         }
 
-        const response = await getAccessToken(req.query.code?.toString(), req.query.state?.toString());
-        
+        // this gets the token from Medicare.gov once the 'user' authenticates their Medicare.gov account
+        const response = await getAccessToken(req.query.code?.toString(), req.query.state?.toString());        
+        const authToken = new AuthorizationToken(response.data);
+
         /* DEVELOPER NOTES:
         * This is where you would most likely place some type of
         * persistence service/functionality to store the token along with
-        * the user identifiers
-        * Of course after ensuring there is a proper token response
-         */
-        const authToken = new AuthorizationToken(response.data);
+        * the application user identifiers
+         */        
     
+        // Here we are grabbing the mocked 'user' for our application
+        // to be able to store the access token for that user
+        // thereby linking the 'user' of our sample applicaiton with their Medicare.gov account
+        // providing access to their Medicare data to our sample application
         const loggedInUser = getLoggedInUser(db);
         loggedInUser.authToken = authToken;
-        //db.authTokens[authToken.patient] = authToken;
+        
 
         /* DEVELOPER NOTES:
-        * Here we will use the token to get the EoB data
-        * for the patient
+        * Here we will use the token to get the EoB data for the mocked 'user' of the sample application
+        * then to save trips to the BB2 API we will store it in the mocked db with the mocked 'user'
+        *
+        * You could also request data for the Patient endpoint and/or the Coverage endpoint here
+        * using similar functionality
         */
         const eobData = await getBenefitData( req, res);
         loggedInUser.eobData = eobData;
-        
 
     } catch (e) {
         /* DEVELOPER NOTES:
