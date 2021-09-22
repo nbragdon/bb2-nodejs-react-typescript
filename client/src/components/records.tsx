@@ -1,54 +1,20 @@
 import { Table, TableCaption, TableRow, TableCell, TableHead, TableBody } from '@cmsgov/design-system';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export default function Records({ }) {   
-
-    const [eob, setEob] = useState<any>();
-    let eobDisplay = (<div><pre>NO DATA
-    </pre></div>);
-
-    async function loadInitialData() {
-        const getEob = await axios.get('/api/data/benefit');
-        setEob(getEob.data);
-    }
-
-    if (eob == ''){
-        let eobDisplay = (<div><pre>NO DATA
-            </pre></div>);
-    } else {
-        eobDisplay = (<div><pre>
-        {JSON.stringify(eob, null, 2)}
-        </pre></div>);
-    }
-   
+    const [records, setRecords] = useState<any>(); 
     useEffect(() => {
-        loadInitialData();
-    }, []);
-
-    const items = [
-        {
-            id: 1,
-            code: '0',
-            display: 'Lab tests - other (Medicare fee schedule)',
-            value: '$125.98'
-        },
-        {
-            id: 2,
-            code: '45385',
-            display: 'Local carrier non-durable medical equipment, prosthetics, orthotics, and supplies (DMEPOS) claim',
-            value: '$350'
-        },
-        {
-            id: 3,
-            code: 'P8D',
-            display: 'Endoscopy - colonoscopy',
-            value: '$1499.99'
-        }
-    ]    
+        fetch('/api/data/benefit')
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            setRecords(data);
+        })
+    }, [])      
     return (
         <div className='full-width-card'>
-            {eobDisplay}
             <Table className="ds-u-margin-top--2" stackable stackableBreakpoint="md">
                 <TableCaption>Medicare claims data</TableCaption>
                 <TableHead>
@@ -59,18 +25,22 @@ export default function Records({ }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {items.map(item=>(
-                        <TableRow key={item.id}>
+                    {records.map(record=>(
+                        <TableRow key={record.id}>
                             <TableCell stackedTitle="Document title" headers="column_1">
-                                {item.code}
+                                {record.code}
                             </TableCell>
                             <TableCell stackedTitle="Description" headers="column_2">
-                                {item.display}
+                                {record.display}
                             </TableCell>
                             <TableCell stackedTitle="Year" headers="column_3">
-                                {item.value}
+                                {record.value}
                             </TableCell>
                         </TableRow>
+                        // Data fields 
+                        // entry[0].resource[0].item[0].productOrService.coding.code & entry[0].resource[0].item[0].productOrService.coding.display & entry[0].resource[0].item[0].quantity.value
+                        // entry[0].resource[1].item[0].productOrService.coding.code & entry[0].resource[1].item[0].productOrService.coding.display & entry[0].resource[1].item[0].quantity.value
+                        // entry[0].resource[2].item[0].productOrService.coding.code & entry[0].resource[2].item[0].productOrService.coding.display & entry[0].resource[2].item[0].quantity.value 
                     ))}
                 </TableBody>
             </Table>
