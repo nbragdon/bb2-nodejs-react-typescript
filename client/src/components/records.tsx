@@ -1,15 +1,20 @@
 import { Table, TableCaption, TableRow, TableCell, TableHead, TableBody } from '@cmsgov/design-system';
 import { useEffect, useState } from 'react';
+import dataviewer from './dataviewer';
+
 
 export default function Records({ }) {   
+    //const [records, setRecords] = useState<object>();
+    //const [records, setRecords] = useState<Record<'prop1'|'prop2'|'prop3',string>>();
     const [records, setRecords] = useState<any>(); 
+    //const [records, setRecords] = useState<Record[]>([]);
     useEffect(() => {
         fetch('/api/data/benefit')
         .then(res => {
             return res.json();
         })
         .then(data => {
-            console.log(data);
+            //console.log(data);
             setRecords(data);
         })
     }, [])      
@@ -25,7 +30,8 @@ export default function Records({ }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {records.map(record=>(
+                
+                    {records.map(record=> { return (
                         <TableRow key={record.id}>
                             <TableCell stackedTitle="Document title" headers="column_1">
                                 {record.code}
@@ -41,7 +47,7 @@ export default function Records({ }) {
                         // entry[0].resource[0].item[0].productOrService.coding.code & entry[0].resource[0].item[0].productOrService.coding.display & entry[0].resource[0].item[0].quantity.value
                         // entry[0].resource[1].item[0].productOrService.coding.code & entry[0].resource[1].item[0].productOrService.coding.display & entry[0].resource[1].item[0].quantity.value
                         // entry[0].resource[2].item[0].productOrService.coding.code & entry[0].resource[2].item[0].productOrService.coding.display & entry[0].resource[2].item[0].quantity.value 
-                    ))}
+                    )})}
                 </TableBody>
             </Table>
         </div>

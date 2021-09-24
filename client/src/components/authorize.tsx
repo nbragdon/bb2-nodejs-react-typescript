@@ -35,10 +35,6 @@ export default function Authorize({ }) {
     }
 
     const patientId = authToken?.patient || 'None';
-
-    // const authTokenDisplay = (<div><pre>
-    //     {JSON.stringify(authToken, null, 2) }
-    // </pre></div>);
     
     return (
         <div>
@@ -47,8 +43,6 @@ export default function Authorize({ }) {
 
             <Settings settingsState={settingsState} setSettingsState={setSettingsState}/>
             <Button onClick={goAuthorize} variation="primary" size="big" className='ds-u-margin-top--2'>Authorize</Button><br />
-            {/* <h3>Auth Token Details:</h3>
-            {authTokenDisplay} */}
             <p className='ds-u-measure--wide'>
                 <a href="https://bluebutton.cms.gov/developers/">Learn more about v2/v1, PCKE, and other options from the Blue Button 2.0 documentation</a>
             </p>
