@@ -11,7 +11,6 @@ export type EOBRecord = {
     amount: number
 }
 
-
 export default function Records({ }) {
     const [records, setRecords] = useState<EOBRecord[]>([]);
     /*
@@ -50,9 +49,9 @@ export default function Records({ }) {
                 <TableCaption>Medicare claims data</TableCaption>
                 <TableHead>
                     <TableRow>
-                        <TableCell id="column_1">Code</TableCell>
-                        <TableCell id="column_2">Name</TableCell>
-                        <TableCell id="column_3">Price</TableCell>
+                        <TableCell id="column_1">NDC Code</TableCell>
+                        <TableCell id="column_2">Medication Name</TableCell>
+                        <TableCell id="column_3">Cost</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

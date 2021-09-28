@@ -35,7 +35,8 @@ export async function getBenefitData(req: Request, res: Response) {
 */
 export async function getBenefitDataEndPoint(req: Request, res: Response) {
     const loggedInUser = getLoggedInUser(db);
-    const data = loggedInUser.eobData
+    const data = loggedInUser.eobData;
+    res.json(data);
 }
 
 export async function getPatientData(req: Request, res: Response) {
