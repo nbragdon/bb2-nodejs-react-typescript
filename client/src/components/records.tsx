@@ -1,4 +1,6 @@
 import { Table, TableCaption, TableRow, TableCell, TableHead, TableBody } from '@cmsgov/design-system';
+import axios from 'axios';
+import { AnyRecord } from 'dns';
 import { useEffect, useState } from 'react';
 import dataviewer from './dataviewer';
 
@@ -12,6 +14,7 @@ export type EOBRecord = {
 
 export default function Records({ }) {
     const [records, setRecords] = useState<EOBRecord[]>([]);
+    
     useEffect(() => {
         fetch('/api/data/benefit')
             .then(res => {
@@ -21,15 +24,16 @@ export default function Records({ }) {
                     const resource = resourceData.resource;
                     return {
                         id: resource.id,
-                        code: resource.item[0]?.category?.coding[0]?.code,
-                        display: resource.item[0]?.category?.coding[0]?.display,
-                        amount: resource.payment?.amount?.value
+                        code: resource.item[0]?.productOrService?.coding[0]?.code,
+                        display: resource.item[0]?.productOrService?.coding[0]?.display || 'Unknown Medication',
+                        amount: resource.item[0]?.adjudication[7]?.amount?.value
                     }
                 });
                 console.log(records);
                 setRecords(records);
             });
     }, [])
+
     return (
         <div className='full-width-card'>
             <Table className="ds-u-margin-top--2" stackable stackableBreakpoint="md">
@@ -53,7 +57,7 @@ export default function Records({ }) {
                                     {record.display}
                                 </TableCell>
                                 <TableCell stackedTitle="Year" headers="column_3">
-                                    {record.amount}
+                                    ${record.amount}.00
                                 </TableCell>
                             </TableRow>
                             // Data fields 
