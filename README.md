@@ -1,24 +1,16 @@
-Running backend
+Running backend & frontend
 ---------------
-    cd server
-    yarn install
-
+    
     copy server/src/configs/sample.config.ts -> server/src/configs/config.ts
     replace the secret variables with the ones for your application
 
     copy server/src/pre-start/env/sandbox.sample.env -> server/src/pre-start/env/development.env
 
-    yarn start:dev
-
-Running frontend
-----------------
-    cd client
-    yarn install
-    yarn start
+    docker-compose up -d
 
 Development
 -----------
-In order to add a new api endpoint, it must be added first in
-server/api/base.ts. After that, the compiler will throw errors until both
-server/controllers/routes.ts and client/src/App.tsx are updated accordingly.
+Read the DEVELOPER NOTES found in the code to understand the application
+and where you will need to make adjustments/changes as well as some 
+suggestions for best practices.
 
