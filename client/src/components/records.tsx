@@ -40,7 +40,6 @@ export default function Records({ }) {
                         amount: resource.item[0]?.adjudication[7]?.amount?.value
                     }
                 });
-                console.log(records);
                 setRecords(records);
             });
     }, [])
