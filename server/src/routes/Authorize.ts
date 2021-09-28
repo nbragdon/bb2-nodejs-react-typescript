@@ -12,7 +12,7 @@ const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 export async function authorizationCallback(req: Request, res: Response) {
     try {
-        console.log('req.query', req.query);
+        
         if (!req.query.code) {
             throw new Error('Response was missing access code');
         }
@@ -63,7 +63,6 @@ export async function authorizationCallback(req: Request, res: Response) {
 }
 
 export async function getAuthUrl(req: Request, res: Response) {
-    console.log('req.query', req.query);
 
     /* DEVELOPER NOTE:
     * to utilize the latest security features/best practices
@@ -75,7 +74,6 @@ export async function getAuthUrl(req: Request, res: Response) {
         env: req.query?.env?.toString() || db.settings.env,
         pkce: req.query?.pkce?.toString() ? pkce : db.settings.pkce
     });
-    console.log('db.settings', db.settings);
     res.send(generateAuthorizeUrl());
 }
 

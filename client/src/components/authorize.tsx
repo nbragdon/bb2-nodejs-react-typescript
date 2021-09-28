@@ -30,7 +30,6 @@ export default function Authorize({ }) {
 
     async function goAuthorize() {
         const authUrlResponse = await axios.get(`/api/authorize/authurl`, { params: settingsState });
-        console.log('authUrlResponse.data', authUrlResponse.data);
         window.location.href = authUrlResponse.data || '/';
     }
 

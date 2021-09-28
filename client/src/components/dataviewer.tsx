@@ -16,7 +16,6 @@ export default function({dataUrl, name}: Props) {
 
     async function getData() {
         const getDataResponse = await axios.get(dataUrl + '?' + urlQueryString);
-        console.log('getDataResponse.data', getDataResponse.data);
         setResponseData(getDataResponse.data);
     }
 

@@ -15,12 +15,12 @@ export default function Settings({ settingsState, setSettingsState}: Props) {
 
     const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSettingsState({ ...settingsState, [event.target.name]: event.target.checked });
-        console.log('state', settingsState);
+        
     };
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSettingsState({ ...settingsState, [event.target.name]: event.target.value });
-        console.log('state', settingsState);
+        
     };
 
     return (
