@@ -26,14 +26,16 @@ export async function getBenefitData(req: Request, res: Response) {
     return response.data;
 }
 
-// this function is used directly by the front-end to 
-// retrieve eob data from the mocked DB
-// DEVELOPER NOTES: This would be replaced by a persistence service layer for whatever
-//  DB you would choose to use
+/* 
+* DEVELOPER NOTES:
+* this function is used directly by the front-end to 
+* retrieve eob data from the mocked DB
+* This would be replaced by a persistence service layer for whatever
+*  DB you would choose to use
+*/
 export async function getBenefitDataEndPoint(req: Request, res: Response) {
     const loggedInUser = getLoggedInUser(db);
     const data = loggedInUser.eobData
-    res.json(data);
 }
 
 export async function getPatientData(req: Request, res: Response) {

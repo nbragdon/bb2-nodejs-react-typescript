@@ -35,9 +35,9 @@ export default function Records({ }) {
                     const resource = resourceData.resource;
                     return {
                         id: resource.id,
-                        code: resource.item[0]?.productOrService?.coding[0]?.code,
+                        code: resource.item[0]?.productOrService?.coding[0]?.code || 'Unknown',
                         display: resource.item[0]?.productOrService?.coding[0]?.display || 'Unknown Medication',
-                        amount: resource.item[0]?.adjudication[7]?.amount?.value
+                        amount: resource.item[0]?.adjudication[7]?.amount?.value || '0'
                     }
                 });
                 setRecords(records);
@@ -60,13 +60,13 @@ export default function Records({ }) {
                     {records.map(record => {
                         return (
                             <TableRow key={record.id}>
-                                <TableCell stackedTitle="Document title" headers="column_1">
+                                <TableCell stackedTitle="NDC Code" headers="column_1">
                                     {record.code}
                                 </TableCell>
-                                <TableCell stackedTitle="Description" headers="column_2">
+                                <TableCell stackedTitle="Medication Name" headers="column_2">
                                     {record.display}
                                 </TableCell>
-                                <TableCell stackedTitle="Year" headers="column_3">
+                                <TableCell stackedTitle="Cost" headers="column_3">
                                     ${record.amount}.00
                                 </TableCell>
                             </TableRow>

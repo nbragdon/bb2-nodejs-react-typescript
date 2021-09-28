@@ -26,7 +26,7 @@ export default function PatientData({ }) {
     
     /* DEVELOPER NOTES:
     * Here we are hard coding the users information for the sake of saving time
-    * you would display user information that you have stored in whatever persistence layer/mechcanism 
+    * you would display user information that you have stored in whatever persistence layer/mechanism 
     * your application is using
     */
     return (

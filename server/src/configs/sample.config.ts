@@ -1,7 +1,8 @@
 /*
-Copy this file and rename it to config.js
-Replace your client/secret/callback url for each environment below with your specific app details
-(Note: local is mainly for BB2 internal developers)
+* DEVELOPER NOTES:
+* Copy this file and rename it to config.js
+* Replace your client/secret/callback url for each environment below with your specific app details
+* (Note: local is mainly for BB2 internal developers)
 */
 export type ConfigType = {
     [env: string]: {
