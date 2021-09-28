@@ -14,7 +14,18 @@ export type EOBRecord = {
 
 export default function Records({ }) {
     const [records, setRecords] = useState<EOBRecord[]>([]);
-    
+    /*
+    * DEVELOPER NOTES:
+    *  Here we are parsing through the different PDE Claim records
+    * for the user/beneficiary.  We have hard coded certain pieces of this data. (ie...item[0])
+    * You will want to find a method of parsing the FHIR JSON response to get the data
+    * you need for your application.  Don't forget to use a 'Discriminator' to determine
+    * which item within a list you want to get data from.
+    * 
+    * ie.  You are interested in getting all medications NDC codes you would use the following criteria/discriminator
+    * resource.item[N].coding[N].code WHERE resource.item[N].coding[N].system = "http://hl7.org/fhir/sid/ndc"
+    * 
+    */
     useEffect(() => {
         fetch('/api/data/benefit')
             .then(res => {
@@ -60,10 +71,6 @@ export default function Records({ }) {
                                     ${record.amount}.00
                                 </TableCell>
                             </TableRow>
-                            // Data fields 
-                            // entry[0].resource[0].item[0].productOrService.coding.code & entry[0].resource[0].item[0].productOrService.coding.display & entry[0].resource[0].item[0].quantity.value
-                            // entry[0].resource[1].item[0].productOrService.coding.code & entry[0].resource[1].item[0].productOrService.coding.display & entry[0].resource[1].item[0].quantity.value
-                            // entry[0].resource[2].item[0].productOrService.coding.code & entry[0].resource[2].item[0].productOrService.coding.display & entry[0].resource[2].item[0].quantity.value 
                         )
                     })}
                 </TableBody>
