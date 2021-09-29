@@ -11,7 +11,7 @@ export default function Header({ }) {
             </h1>
             <div className="ds-u-text-align--center">
                 <Badge variation="info" size="big">
-                    Medicare claims data
+                    Medicare (PDE) Medication Claims Data
                 </Badge>
             </div>
         </header>

@@ -46,7 +46,7 @@ export default function Records({ }) {
     return (
         <div className='full-width-card'>
             <Table className="ds-u-margin-top--2" stackable stackableBreakpoint="md">
-                <TableCaption>Medicare claims data</TableCaption>
+                <TableCaption>Medicare Medication Claims Data</TableCaption>
                 <TableHead>
                     <TableRow>
                         <TableCell id="column_1">NDC Code</TableCell>
