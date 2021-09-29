@@ -1,8 +1,5 @@
 import { Table, TableCaption, TableRow, TableCell, TableHead, TableBody } from '@cmsgov/design-system';
-import axios from 'axios';
-import { AnyRecord } from 'dns';
 import { useEffect, useState } from 'react';
-import dataviewer from './dataviewer';
 
 export type EOBRecord = {
     id: string,
@@ -24,6 +21,10 @@ export default function Records({ }) {
     * ie.  You are interested in getting all medications NDC codes you would use the following criteria/discriminator
     * resource.item[N].coding[N].code WHERE resource.item[N].coding[N].system = "http://hl7.org/fhir/sid/ndc"
     * 
+    * 
+    * *NOTE* 
+    * There are multiple claim types within the BB2 Sandbox, not just PDE (Part-D Events - Drug/Medication Claims).  There are also
+    * Carrier Claims, SNF, HHA, Hospice, Inpatient, and Outpatient
     */
     useEffect(() => {
         fetch('/api/data/benefit')

@@ -4,11 +4,9 @@ import AuthorizationToken from '../entities/AuthorizationToken';
 import Settings from '../entities/Settings';
 import db from '../utils/db';
 import { getAccessToken, generateAuthorizeUrl } from '../utils/bb2';
-import axios from 'axios';
 import { getBenefitData } from './Data';
 import { getLoggedInUser } from 'src/utils/user';
 
-const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 export async function authorizationCallback(req: Request, res: Response) {
     try {

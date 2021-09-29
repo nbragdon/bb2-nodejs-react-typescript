@@ -1,9 +1,8 @@
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import path from 'path';
 import helmet from 'helmet';
 
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import StatusCodes from 'http-status-codes';
 import 'express-async-errors';
 
@@ -38,7 +37,7 @@ app.use('/api', BaseRouter);
 
 // Print API errors
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response) => {
     logger.err(err, true);
     return res.status(BAD_REQUEST).json({
         error: err.message,

@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react'
 import { Button } from '@cmsgov/design-system';
-import Records from './records'
 import axios from 'axios';
 import chart from '../images/who-charted.png'
-import Settings from './settings';
-import { Authorization } from '../types/authorization';
 import { SettingsType } from '../types/settings';
+import { useState } from 'react';
 
 export default function PatientData({ }) {
-    const [header, setHeader] = useState('Add your Medicare data');
-    const [show, setShow] = useState(true);     
-    const [authToken, setAuthToken] = useState<Authorization | undefined>(undefined);
-    const [settingsState, setSettingsState] = useState<SettingsType>({
+    const [header] = useState('Add your Medicare Medication data');
+    const [settingsState] = useState<SettingsType>({
         pkce: true,
         version: 'v2',
         env: 'sandbox'
     });
-
     async function goAuthorize() {
         const authUrlResponse = await axios.get(`/api/authorize/authurl`, { params: settingsState });
         window.location.href = authUrlResponse.data || '/';
-    }
-
-    const patientId = authToken?.patient || 'None';
+    }    
     
     /* DEVELOPER NOTES:
     * Here we are hard coding the users information for the sake of saving time
