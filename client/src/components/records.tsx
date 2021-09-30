@@ -18,7 +18,7 @@ export default function Records({ }) {
     * you need for your application.  Don't forget to use a 'Discriminator' to determine
     * which item within a list you want to get data from.
     * 
-    * ie.  You are interested in getting all medications NDC codes you would use the following criteria/discriminator
+    * ie.  You are interested in getting all Prescription Drug NDC codes you would use the following criteria/discriminator
     * resource.item[N].coding[N].code WHERE resource.item[N].coding[N].system = "http://hl7.org/fhir/sid/ndc"
     * 
     * 
@@ -36,7 +36,7 @@ export default function Records({ }) {
                     return {
                         id: resource.id,
                         code: resource.item[0]?.productOrService?.coding[0]?.code || 'Unknown',
-                        display: resource.item[0]?.productOrService?.coding[0]?.display || 'Unknown Medication',
+                        display: resource.item[0]?.productOrService?.coding[0]?.display || 'Unknown Prescription Drug',
                         amount: resource.item[0]?.adjudication[7]?.amount?.value || '0'
                     }
                 });
@@ -47,11 +47,11 @@ export default function Records({ }) {
     return (
         <div className='full-width-card'>
             <Table className="ds-u-margin-top--2" stackable stackableBreakpoint="md">
-                <TableCaption>Medicare Medication Claims Data</TableCaption>
+                <TableCaption>Medicare Prescription Drug Claims Data</TableCaption>
                 <TableHead>
                     <TableRow>
                         <TableCell id="column_1">NDC Code</TableCell>
-                        <TableCell id="column_2">Medication Name</TableCell>
+                        <TableCell id="column_2">Prescription Drug Name</TableCell>
                         <TableCell id="column_3">Cost</TableCell>
                     </TableRow>
                 </TableHead>
@@ -63,7 +63,7 @@ export default function Records({ }) {
                                 <TableCell stackedTitle="NDC Code" headers="column_1">
                                     {record.code}
                                 </TableCell>
-                                <TableCell stackedTitle="Medication Name" headers="column_2">
+                                <TableCell stackedTitle="Prescription Drug Name" headers="column_2">
                                     {record.display}
                                 </TableCell>
                                 <TableCell stackedTitle="Cost" headers="column_3">

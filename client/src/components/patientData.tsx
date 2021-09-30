@@ -5,7 +5,7 @@ import { SettingsType } from '../types/settings';
 import { useState } from 'react';
 
 export default function PatientData({ }) {
-    const [header] = useState('Add your Medicare Medication data');
+    const [header] = useState('Add your Medicare Prescription Drug data');
     const [settingsState] = useState<SettingsType>({
         pkce: true,
         version: 'v2',
@@ -23,11 +23,11 @@ export default function PatientData({ }) {
     */
     return (
         <div>
-            <h3>Medicare Medication Records</h3>
+            <h3>Medicare Prescription Drug Records</h3>
             <div className="ds-u-display--flex ds-u-flex-direction--row ds-u-align-items--start">
                 <img src={chart} alt="Chart icon" className=""/>
                 <p className='ds-u-padding-x--2 ds-u-margin-top--0'>
-                    John, you can now allow Springfield General Hospital access to your Medicare medication records!
+                    John, you can now allow Springfield General Hospital access to your Medicare prescription drug records!
                 </p>
             </div>
             <div className='ds-u-margin-top--2 ds-u-border-top--2'>
