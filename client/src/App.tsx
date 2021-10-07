@@ -1,15 +1,8 @@
-import Authorize from './components/authorize';
-// import Navbar from './components/navbar';
 import Header from './components/header';
-import Dataviewer from './components/dataviewer';
 import Patient from './components/patient';
 import PatientData from './components/patientData';
 import Records from './components/records';
-import { 
-  BrowserRouter as Router, 
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import { TabPanel, Tabs } from '@cmsgov/design-system';
 
 function App() {
@@ -28,30 +21,12 @@ function App() {
               <PatientData />
             </div>          
           </div>
-          {/* TODO: Display records after data fetch */}
+          {}
           <Records /> 
-        </TabPanel>
-        <TabPanel id="routes" tab="Auth settings">
+          {}
         <div>
           <div>
-            {/* <Navbar /> */}
-            <Switch>
-              <Route exact path="/">
-                <Authorize />
-              </Route>
-              <Route path="/benefit">
-                <Dataviewer dataUrl="/api/data/benefit" name="Benefit"></Dataviewer>
-              </Route>
-              <Route path="/patient">
-                <Dataviewer dataUrl="/api/data/patient" name="Patient"></Dataviewer>
-              </Route>
-              <Route path="/coverage">
-                <Dataviewer dataUrl="/api/data/coverage" name="Coverage"></Dataviewer>
-              </Route>
-              <Route path="/userprofile">
-                <Dataviewer dataUrl="/api/data/userprofile" name="User Profile"></Dataviewer>
-              </Route>
-            </Switch>
+            {}
           </div>
         </div>
         </TabPanel>

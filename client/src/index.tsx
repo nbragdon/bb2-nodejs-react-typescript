@@ -1,12 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
 
-// import theme from './theme';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-// import '@fontsource/roboto';
 
 ReactDOM.render(
   <div className="ds-base">

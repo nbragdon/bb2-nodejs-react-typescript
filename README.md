@@ -1,24 +1,22 @@
-Running backend
+Running backend & frontend
 ---------------
-    cd server
-    yarn install
-
+    
     copy server/src/configs/sample.config.ts -> server/src/configs/config.ts
     replace the secret variables with the ones for your application
 
     copy server/src/pre-start/env/sandbox.sample.env -> server/src/pre-start/env/development.env
 
-    yarn start:dev
+    docker-compose up -d
 
-Running frontend
-----------------
-    cd client
-    yarn install
-    yarn start
+BB2 Sandbox User
+-----------
+To ensure data displays properly in the sample application please use a 
+Blue Button 2 Sandbox user that has PDE EoBs.  An example of a user with this
+data would be:  BBUser29999 (PWD: PW29999!) or BBUser29998 (PWD: PW29998!)
 
 Development
 -----------
-In order to add a new api endpoint, it must be added first in
-server/api/base.ts. After that, the compiler will throw errors until both
-server/controllers/routes.ts and client/src/App.tsx are updated accordingly.
+Read the DEVELOPER NOTES found in the code to understand the application
+and where you will need to make adjustments/changes as well as some 
+suggestions for best practices.
 
