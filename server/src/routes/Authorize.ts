@@ -61,7 +61,7 @@ export async function authorizationCallback(req: Request, res: Response) {
 }
 
 export async function getAuthUrl(req: Request, res: Response) {
-
+    console.log("HERE!")
     /* DEVELOPER NOTE:
     * to utilize the latest security features/best practices
     * it is recommended to utilize pkce
